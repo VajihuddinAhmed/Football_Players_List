@@ -1,0 +1,15 @@
+.player-list {
+  width: 85vw;
+  margin: 3rem auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+}
+
+.sorting {
+  width: 140px;
+  height: 33px;
+  padding-left: 10px;
+  font-size: 14px;
+  font-weight: 550;
+}
