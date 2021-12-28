@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import './playerList.css';
 import { Card } from '../playerCard/playerCard';
+import { PlayerStatisticsModal} from '../playerStatisticsModal/playerStatisticsModal';
 
 export const PlayerList = (props) => {
     const [listPlayers, setListPlayers] = useState(props.players)
+    const [modalState, setModalState] = useState(false)
+    const [modalData, setModalData] = useState(null)
     
     const [sorted, setSorted] = useState('')
     const sorting = e => {
@@ -18,6 +21,16 @@ export const PlayerList = (props) => {
         setListPlayers (newList)
         console.log('handleRemovePlayer',nom)
     }
+
+    const handleCloseModal = () => {
+        setModalState(false)
+    }
+
+    const manageState = ({item}) => {
+        setModalState(true)
+        setModalData(item)
+    }
+
     return (
         <div>
             <div className="sorting-section">
@@ -37,10 +50,11 @@ export const PlayerList = (props) => {
                         }
                         return 0
                     }).map((item) => (
-                        <Card key={item.Joueur} item={item} removePlayer={handleRemovePlayer} />
+                        <Card key={item.Joueur} item={item} removePlayer={handleRemovePlayer} showModal={manageState} />
                     ))
                 }
             </div>
+            { modalState && <PlayerStatisticsModal modalState={modalState} handleCloseModal={handleCloseModal} data={modalData} />}
         </div>
     )
 }

@@ -13,17 +13,17 @@ export const PlayerStatisticsModal = (props) => {
             closeTimeoutMS={200}
             className="modal"
         >
-            <h2 className="modal--title">{props.data.item.Joueur}</h2>
-            <p>Apps: {props.data.item.Apps}</p>
-            <p>Minutes Jouees: {props.data.item.Mins}</p>
-            <p>Total Buts: {props.data.item.Buts}</p>
-            <p>Total Passes Decisives: {props.data.item.Passes_Decisives}</p>
-            <p>Carton Jaune: {props.data.item.Jau}</p>
-            <p>Carton Rouge: {props.data.item.Rou}</p>
-            <p>Tirs Par Match: {props.data.item.TpM}</p>
-            <p>Passes Reuisses: {props.data.item.Passes_Reuisses}</p>
-            <p>Aeriens Gagnes: {props.data.item.AériensGagnés}</p>
-            <p>Homme du Match: {props.data.item.HdM}</p>
+            <h2 className="modal--title">{props.data.Joueur}</h2>
+            <p>Apps: {props.data.Apps}</p>
+            <p>Minutes Jouees: {props.data.Mins}</p>
+            <p>Total Buts: {props.data.Buts}</p>
+            <p>Total Passes Decisives: {props.data.Passes_Decisives}</p>
+            <p>Carton Jaune: {props.data.Jau}</p>
+            <p>Carton Rouge: {props.data.Rou}</p>
+            <p>Tirs Par Match: {props.data.TpM}</p>
+            <p>Passes Reuisses: {props.data.Passes_Reuisses}</p>
+            <p>Aeriens Gagnes: {props.data.AériensGagnés}</p>
+            <p>Homme du Match: {props.data.HdM}</p>
             <button className="modal--button" onClick={props.handleCloseModal}>Close</button>
         </Modal>
     )
