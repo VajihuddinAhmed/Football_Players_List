@@ -3,13 +3,21 @@ import './playerList.css';
 import { Card } from '../playerCard/playerCard';
 
 export const PlayerList = (props) => {
-
+    const [listPlayers, setListPlayers] = useState(props.players)
+    
     const [sorted, setSorted] = useState('')
     const sorting = e => {
         let sortingBy = e.target.value
         setSorted(sortingBy)
     }
-
+    const filteredPlayers = listPlayers.filter((item) => {
+        return item.Joueur.toLowerCase().includes(props.searchTerm.toLowerCase())
+    })
+    const handleRemovePlayer = (nom) => {
+        let newList = listPlayers.filter((item) => item.Joueur !== nom)
+        setListPlayers (newList)
+        console.log('handleRemovePlayer',nom)
+    }
     return (
         <div>
             <div className="sorting-section">
@@ -21,7 +29,7 @@ export const PlayerList = (props) => {
             </div>
             <div className='player-list'>
                 {
-                    props.players.sort((a, b) => {
+                    filteredPlayers.sort((a, b) => {
                         if (sorted === "best") {
                             return a.Passes_Reuisses < b.Passes_Reuisses ? 1 : -1 
                         } else if (sorted === "average") {
@@ -29,7 +37,7 @@ export const PlayerList = (props) => {
                         }
                         return 0
                     }).map((item) => (
-                        <Card key={item.Joueur} item={item} />
+                        <Card key={item.Joueur} item={item} removePlayer={handleRemovePlayer} />
                     ))
                 }
             </div>

@@ -1,38 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { PlayerList } from './components/playerList/playerList';
-import { SearchBox } from './components/search-box/search-box';
 import { Players } from './components/db';
+import { AddPlayer } from './components/addPlayer/addPlayer';
 
-class App extends React.Component {
-  constructor() {
-    super()
+const App = (props) => {
 
-    this.state = {
-      players: Players,
-      searchField: ''
-    }
-    
+  const [players , setPlayers] = useState(Players);
+  const [searchField, setSearchField] = useState('');
+  const [playerModal, setPlayerModal] = useState(false);
+
+  const manageState = () => {
+    setPlayerModal(!playerModal)
+  }
+  const handleCloseModal = () => {
+    setPlayerModal(false)
+}
+
+  const handleChange = (e) => {
+    setSearchField(e.target.value);
   }
 
-  handleChange = (e) => {
-    this.setState({ searchField: e.target.value })
-  }
-
-  render() {
-    const { players, searchField } = this.state
-    console.log(players)
-    const filteredPlayers = players.filter((item) => {
-      return item.Joueur.toLowerCase().includes(searchField.toLowerCase())
-    })
-    return (
-      <div className="App">
-        <h1>Football Players List</h1>
-        <SearchBox placeholder='search players' handleChange={this.handleChange} />
-        <PlayerList players={filteredPlayers}/>
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+      <h1>Football Players List</h1>
+      <input 
+        type='search' 
+        placeholder={"search players"} 
+        onChange={handleChange} 
+        className='search'
+      />
+      <button onClick={() => manageState()}>Add Player</button>
+      <AddPlayer modalState={playerModal} handleCloseModal={handleCloseModal} data={props} />
+      <PlayerList players={players} searchTerm={searchField}  />
+    </div>
+  );
 }
 
 export default App;

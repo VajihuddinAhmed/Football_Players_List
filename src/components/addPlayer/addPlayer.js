@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import './addPlayer.css';
 import { Players } from '../db';
+import Modal from 'react-modal';
 
-export const AddPlayer = () => {
+export const AddPlayer = (props) => {
     
-    const [newPost, setNewPost] = useState({
+    const [newPlayer, setNewPlayer] = useState({
         Joueur: '',
         Apps: '',
         Mins: '',
@@ -18,17 +19,17 @@ export const AddPlayer = () => {
         HdM: ''
     })
 
-    const { Joueur, Apps, Mins, Buts, Passes_Decisives, Jau, Rou, TpM, Passes_Reuisses, AériensGagnés, HdM  } = newPost
+    const { Joueur, Apps, Mins, Buts, Passes_Decisives, Jau, Rou, TpM, Passes_Reuisses, AériensGagnés, HdM  } = newPlayer
 
     const handleChange = (e) => {
         const { name, value } = e.target
-        setNewPost({ ...newPost, [name]: value }) 
+        setNewPlayer({ ...newPlayer, [name]: value }) 
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
-        let todos = [...Players]
-        todos.push({
+        let adds = [...Players]
+        adds.push({
             Joueur,
             Apps,
             Mins,
@@ -41,13 +42,24 @@ export const AddPlayer = () => {
             AériensGagnés,
             HdM            
         })
+        console.log(newPlayer)
+        setNewPlayer(adds)
+        e.target.reset()
 
     }
 
     return (
+            <Modal
+            isOpen={props.modalState} 
+            contentLabel="player statistics" 
+            ariaHideApp={false} 
+            onRequestClose={props.handleCloseModal}
+            closeTimeoutMS={200}
+            className="player--modal"
+            >
             <div>
                 <h4>Add Player</h4>
-                <form onSubmit={handleSubmit}>
+                <form className='form'>
                     <div>
                         <div>
                         <p>Joueur</p>
@@ -102,8 +114,9 @@ export const AddPlayer = () => {
                         <input type="number" name="HdM" value={HdM} onChange={handleChange} required className="source" />
                         </div>
                     </div>
-                    <button className="modal--button" type="submit">Submit</button>
+                    <button onClick={() => handleSubmit} className='modal--button' type="submit">Submit</button>
                 </form>
             </div>
+            </Modal>
     )
 }

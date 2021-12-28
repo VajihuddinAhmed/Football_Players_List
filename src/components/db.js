@@ -249,7 +249,19 @@ export const Players =  [
             "HdM": "1"
         },
         {
-            "Joueur": "joker",
+            "Joueur": "ping",
+            "Apps": "1",
+            "Mins": "8311",
+            "Buts": "1",
+            "Passes_Decisives": "1",
+            "Jau": "1",
+            "TpM": "1",
+            "Passes_Reuisses": "80",
+            "AériensGagnés": "0.2",
+            "HdM": "1"
+        },
+        {
+            "Joueur": "ming",
             "Apps": "1",
             "Mins": "8311",
             "Buts": "1",
