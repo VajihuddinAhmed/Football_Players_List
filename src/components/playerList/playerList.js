@@ -90,22 +90,9 @@ export const PlayerList = (props) => {
 
     return (
         <div>
-            <AddPlayer modalState={playerModal} handleCloseModal={handlePlayerModal} handleSubmit={handleSubmit} handleChange={handleChange} playerData={newPlayer} />
             <button onClick={() => managePlayerState()}>Add Player</button>
-            <button onClick={() => {setTeamModal(true); getRandom()}}>Create Teams</button>
-            <Modal 
-                isOpen={teamModal} 
-                contentLabel="player statistics" 
-                ariaHideApp={false} 
-                onRequestClose={handleCloseTeamModal}
-                closeTimeoutMS={200}
-                className="modal--team"
-            >
+            <button disabled={!(listPlayers.length >= 22)} onClick={() => {setTeamModal(true); getRandom()}}>Create Teams</button>
 
-            <div>
-                {_.chunk(_.sampleSize(listPlayers, [22]), 11).map(item => item.map(i=> <Card key={item.Joueur} item={item}/>)) }
-            </div>
-            </Modal>
             <div className="sorting-section">
                 <select onChange={sorting} className="sorting">
                     <option>All Players</option>
@@ -128,6 +115,33 @@ export const PlayerList = (props) => {
                 }
             </div>
             { modalState && <PlayerStatisticsModal modalState={modalState} handleCloseModal={handleCloseModal} data={modalData} />}
+            {playerModal && <AddPlayer modalState={playerModal} handleCloseModal={handlePlayerModal} handleSubmit={handleSubmit} handleChange={handleChange} playerData={newPlayer} />}
+
+            {teamModal &&<Modal 
+                isOpen={teamModal} 
+                contentLabel="player statistics" 
+                ariaHideApp={false} 
+                onRequestClose={handleCloseTeamModal}
+                closeTimeoutMS={200}
+                className="modal--team"
+            >
+                <div>
+                {_.chunk(_.sampleSize(listPlayers, [22]), 11).map((item, key) =>{ 
+                     const winstats = _.round(_.meanBy(item, (o)=> parseInt(o.Passes_Decisives) ) ) + _.round(_.meanBy(item, (o)=> parseInt(o.Buts) ) )
+                    return (
+                    <div key={key} style={{backgroundColor:'red', padding: '1rem'}}> 
+                    <div> Team {key+1} {`winstats ${winstats} `}</div>
+                    { item.map(i => {   
+                        return (
+                    <div style={{backgroundColor:'orange', display:'inline'}} key={i.Joueur}>
+                        {i.Joueur}<br/>
+                    </div>)}
+                            )} 
+                    </div>)} ) }
+                    </div>
+                
+            </Modal>}
+
         </div>
     )
 }
