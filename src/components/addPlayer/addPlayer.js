@@ -18,51 +18,53 @@ export const AddPlayer = (props) => {
             <div>
                 <h4>Add Player</h4>
                 <form className='form' onSubmit={props.handleSubmit}>
+                    <div className='form-container'>
                         <span>
-                        <label>Joueur *</label>
+                        <label className='label'>Joueur</label>
                         <input type="text" name="Joueur" value={Joueur} onChange={props.handleChange} required className="source" />
                         </span>
                         <span>
-                        <label>Apps *</label>
+                        <label>Apps</label>
                         <input type="number" name="Apps" value={Apps} onChange={props.handleChange} required className="source" />
                         </span>
                         <span>
-                        <label>Mins *</label>
+                        <label>Mins</label>
                         <input type="number" name="Mins" value={Mins} onChange={props.handleChange} required className="source" />
                         </span>
                         <span>
-                        <label>Buts *</label>
+                        <label>Buts</label>
                         <input type="number" name="Buts" value={Buts} onChange={props.handleChange} required className="source" />
                         </span>
                         <span>
-                        <label>Passes_Decisives *</label>
+                        <label>Passes_Decisives</label>
                         <input type="number" name="Passes_Decisives" value={Passes_Decisives} onChange={props.handleChange} required className="source" />
                         </span>
                         <span>
-                        <label>Jau *</label>
+                        <label>Jau</label>
                         <input type="number" name="Jau" value={Jau} onChange={props.handleChange} required className="source" />
                         </span>
                         <span>
-                        <label>Rou *</label>
+                        <label>Rou</label>
                         <input type="number" name="Rou" value={Rou} onChange={props.handleChange} required className="source" />
                         </span>
                         <span>
-                        <label>TpM *</label>
+                        <label>TpM</label>
                         <input type="number" name="TpM" value={TpM} onChange={props.handleChange} required className="source" />
                         </span>
                         <span>
-                        <label>Passes_Reuisses *</label>
+                        <label>Passes_Reuisses</label>
                         <input type="number" name="Passes_Reuisses" value={Passes_Reuisses} onChange={props.handleChange} required className="source" />
                         </span>
                         <span>
-                        <label>AériensGagnés *</label>
+                        <label>AériensGagnés</label>
                         <input type="number" name="AériensGagnés" value={AériensGagnés} onChange={props.handleChange} required className="source" />
                         </span>
                         <span>
-                        <label>HdM *</label>
+                        <label>HdM</label>
                         <input type="number" name="HdM" value={HdM} onChange={props.handleChange} required className="source" />
                         </span>
-                    <button className='modal--button' type="submit">Submit</button>
+                        <button className='modal--button' type="submit">Submit</button>
+                    </div>
                 </form>
             </div>
             </Modal>

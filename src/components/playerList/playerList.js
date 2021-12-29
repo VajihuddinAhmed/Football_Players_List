@@ -129,11 +129,11 @@ export const PlayerList = (props) => {
                 {_.chunk(_.sampleSize(listPlayers, [22]), 11).map((item, key) =>{ 
                      const winstats = _.round(_.meanBy(item, (o)=> parseInt(o.Passes_Decisives) ) ) + _.round(_.meanBy(item, (o)=> parseInt(o.Buts) ) )
                     return (
-                    <div key={key} style={{backgroundColor:'red', padding: '1rem'}}> 
-                    <div> Team {key+1} {`winstats ${winstats} `}</div>
+                    <div key={key} className='team--modal'> 
+                    <div className='team-heading'> Team {key+1} {`Chances of Winning is ${winstats} `}</div>
                     { item.map(i => {   
                         return (
-                    <div style={{backgroundColor:'orange', display:'inline'}} key={i.Joueur}>
+                    <div className='player-names' key={i.Joueur}>
                         {i.Joueur}<br/>
                     </div>)}
                             )} 
