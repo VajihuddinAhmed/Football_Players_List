@@ -93,6 +93,8 @@ export const PlayerList = (props) => {
             <button onClick={() => managePlayerState()}>Add Player</button>
             <button disabled={!(listPlayers.length >= 22)} onClick={() => {setTeamModal(true); getRandom()}}>Create Teams</button>
 
+            <p className='team-line'>{listPlayers.length < 22 ? 'Please add two more players for creating teams' : null}</p>
+
             <div className="sorting-section">
                 <select onChange={sorting} className="sorting">
                     <option>All Players</option>
@@ -130,15 +132,16 @@ export const PlayerList = (props) => {
                      const winstats = _.round(_.meanBy(item, (o)=> parseInt(o.Passes_Decisives) ) ) + _.round(_.meanBy(item, (o)=> parseInt(o.Buts) ) )
                     return (
                     <div key={key} className='team--modal'> 
-                    <div className='team-heading'> Team {key+1} {`Chances of Winning is ${winstats} `}</div>
-                    { item.map(i => {   
-                        return (
-                    <div className='player-names' key={i.Joueur}>
-                        {i.Joueur}<br/>
-                    </div>)}
-                            )} 
-                    </div>)} ) }
-                    </div>
+                        <div className='team-heading'> Team {key+1} {`Chances of Winning is ${winstats} `}</div>
+                        { item.map(i => {   
+                            return (
+                        <div className='player-names' key={i.Joueur}>
+                            {i.Joueur}<br/>
+                        </div>)}
+                        )} 
+                    </div>)
+                } ) }
+                </div>
                 
             </Modal>}
 
