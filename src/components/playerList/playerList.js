@@ -30,7 +30,7 @@ export const PlayerList = (props) => {
 
     const managePlayerState = () => setPlayerModal(!playerModal)
 
-    const handlePlayerModal = () =>  setPlayerModal(false)
+    //const handlePlayerModal = () =>  setPlayerModal(false)
 
     const handleCloseModal = () => setModalState(false)
 
@@ -62,7 +62,7 @@ export const PlayerList = (props) => {
         })
         setListPlayers(adds)
         setNewPlayer(initialPlayerState)
-        handlePlayerModal()
+        managePlayerState()
 
     }
 
@@ -93,7 +93,7 @@ export const PlayerList = (props) => {
             <button onClick={() => managePlayerState()}>Add Player</button>
             <button disabled={!(listPlayers.length >= 22)} onClick={() => {setTeamModal(true); getRandom()}}>Create Teams</button>
 
-            <p className='team-line'>{listPlayers.length < 22 ? 'Please add two more players for creating teams' : null}</p>
+            <p className='team-line'>{listPlayers.length < 22 ? `Please add ${listPlayers.length === 21 ? 'one' : 'two'} more player to create teams` : null}</p>
 
             <div className="sorting-section">
                 <select onChange={sorting} className="sorting">
@@ -117,7 +117,7 @@ export const PlayerList = (props) => {
                 }
             </div>
             { modalState && <PlayerStatisticsModal modalState={modalState} handleCloseModal={handleCloseModal} data={modalData} />}
-            {playerModal && <AddPlayer modalState={playerModal} handleCloseModal={handlePlayerModal} handleSubmit={handleSubmit} handleChange={handleChange} playerData={newPlayer} />}
+            {playerModal && <AddPlayer modalState={playerModal} handleCloseModal={managePlayerState} handleSubmit={handleSubmit} handleChange={handleChange} playerData={newPlayer} />}
 
             {teamModal &&<Modal 
                 isOpen={teamModal} 
